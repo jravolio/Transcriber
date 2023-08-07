@@ -37,7 +37,14 @@ audio_bitrate = '32k'
 convert_video_to_audio(input_file, output_file, audio_bitrate)
 audio_file= open("audio.mp3", "rb")
 model = whisper.load_model("small")
-result = model.transcribe("audio.mp3",initial_prompt="Esse é um vídeo falando sobre poker. Ele opta por jogar de 3-bet, não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?", word_timestamps=True, max_line_count=2)
+result = model.transcribe("audio.mp3",initial_prompt="Esse é um vídeo falando sobre poker. Ele opta por jogar de 3-bet, não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?", word_timestamps=True)
+
+options = {
+    "max_line_width": 16,
+    "max_line_count": 2
+}
+writer = whisper.utils.get_writer("srt", "./", options)
+writer(result, "test.srt")
 print(result["text"])
 # transcript = openai.Audio.transcribe("whisper-1", audio_file, response_format="srt", prompt="Esse é um vídeo falando sobre poker. Ele opta por jogar de 3-bet, não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?", word_timestamps=True, max_line_width=5, max_line_count=2)
 # print(transcript)
