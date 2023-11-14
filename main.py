@@ -1,5 +1,5 @@
+from whisper.utils import get_writer as getwriter
 import subprocess
-# import openai
 import whisper.utils
 import whisper
 
@@ -21,43 +21,46 @@ def convert_video_to_audio(input_file, output_file, audio_bitrate='32k'):
     except subprocess.CalledProcessError as e:
         print(f"Error during conversion: {e}")
 
-
-# openai.api_key = "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"
-# input_file = 'video.mp4'
-# output_file = 'audio.mp3'
-# audio_bitrate = '32k'
-# convert_video_to_audio(input_file, output_file, audio_bitrate)
-# audio_file= open("audio.mp3", "rb")
-# transcript = openai.Audio.transcribe("whisper-1", audio_file, response_format="srt", prompt="Esse é um vídeo falando sobre poker. Ele opta por jogar de 3-bet, não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?", word_timestamps=True, max_line_width=5, max_line_count=2)
-# print(transcript)
-
 input_file = 'video.mp4'
 output_file = 'audio.mp3'
 audio_bitrate = '32k'
-convert_video_to_audio(input_file, output_file, audio_bitrate)
+prompt = "Esse é um vídeo falando sobre poker. Martirosian opta por jogar de 3-bet para 20,000. não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?"
+# convert_video_to_audio(input_file, output_file, audio_bitrate)
+
+
+# audio_file= open("audio.mp3", "rb")
+# model = whisper.load_model("small")
+# result = model.transcribe("audio.mp3",initial_prompt="prompt", word_timestamps=True)
+# print(result["text"])
+
+# model = whisper.load_model("base")
+
+# # load audio and pad/trim it to fit 30 seconds
+# audio = whisper.load_audio("audio.mp3")
+# audio = whisper.pad_or_trim(audio)
+
+# # make log-Mel spectrogram and move to the same device as the model
+# mel = whisper.log_mel_spectrogram(audio).to(model.device)
+
+# # detect the spoken language
+# _, probs = model.detect_language(mel)
+# print(f"Detected language: {max(probs, key=probs.get)}")
+
+# # decode the audio
+# options = whisper.DecodingOptions(fp16 = False)
+# result = whisper.decode(model, mel, options)
+
+# # print the recognized text
+# print(result.text)
+
 audio_file= open("audio.mp3", "rb")
 model = whisper.load_model("small")
-result = model.transcribe("audio.mp3",initial_prompt="Esse é um vídeo falando sobre poker. Ele opta por jogar de 3-bet, não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?", word_timestamps=True)
-
-options = {
-    "max_line_width": 16,
-    "max_line_count": 2
-}
-writer = whisper.utils.get_writer("srt", "./", options)
-writer(result, "test.srt")
+result = model.transcribe("audio.mp3",initial_prompt=prompt, word_timestamps=True)
 print(result["text"])
-# transcript = openai.Audio.transcribe("whisper-1", audio_file, response_format="srt", prompt="Esse é um vídeo falando sobre poker. Ele opta por jogar de 3-bet, não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?", word_timestamps=True, max_line_width=5, max_line_count=2)
-# print(transcript)
-
-# import whisper_timestamped as whisper
-# from whisper.utils import get_writer
-
-# input_file = 'video.mp4'
-# output_file = 'audio.mp3'
-# audio_bitrate = '32k'
-# convert_video_to_audio(input_file, output_file, audio_bitrate)
-# audio = whisper.load_audio("audio.mp3")
-# model = whisper.load_model("tiny", device="cpu")
-# result = whisper.transcribe(model, audio, beam_size=5, best_of=5, temperature=(0.0, 0.2, 0.4, 0.6, 0.8, 1.0), initial_prompt="Esse é um vídeo falando sobre poker. Ele opta por jogar de 3-bet, não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?")
-# import json
-# print(json.dumps(result, indent = 2, ensure_ascii = False))
+word_options = {
+        "highlight_words": False,
+        "max_line_count": 2,
+        "max_line_width": 16
+    }
+srt_writer = getwriter("srt", "./")
+srt_writer(result, 'audio.mp3', word_options)
