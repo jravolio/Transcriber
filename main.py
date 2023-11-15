@@ -24,8 +24,8 @@ def convert_video_to_audio(input_file, output_file, audio_bitrate='32k'):
 input_file = 'video.mp4'
 output_file = 'audio.mp3'
 audio_bitrate = '32k'
-prompt = "Esse é um vídeo falando sobre poker. Martirosian opta por jogar de 3-bet para 20,000. não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?"
-# convert_video_to_audio(input_file, output_file, audio_bitrate)
+prompt = "Esse é um vídeo falando sobre poker. Badziakouski e Watson, opta por jogar de 3-bet para 20,000. não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?"
+convert_video_to_audio(input_file, output_file, audio_bitrate)
 
 
 # audio_file= open("audio.mp3", "rb")
@@ -54,7 +54,7 @@ prompt = "Esse é um vídeo falando sobre poker. Martirosian opta por jogar de 3
 # print(result.text)
 
 audio_file= open("audio.mp3", "rb")
-model = whisper.load_model("small")
+model = whisper.load_model("large")
 result = model.transcribe("audio.mp3",initial_prompt=prompt, word_timestamps=True)
 print(result["text"])
 word_options = {
