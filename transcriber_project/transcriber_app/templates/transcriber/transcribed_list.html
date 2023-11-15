@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>TRANSCRIBED LIST</h1>
+    <div>
+        <a href="{% url 'upload_video' %}">SUBIR VIDEO</a>
+    </div>
+
+    {% for video in videos %}
+        <p>{{ video.title }}</p>
+        <p>{{ video.raw_file }}</p>
+        <a href="{{ video.raw_file.url }}" download="{{ video.raw_file }}.mp4">BAIXAR VIDEO</a>
+    {% endfor %}
+</body>
+</html>
