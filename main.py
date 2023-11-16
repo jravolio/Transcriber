@@ -22,7 +22,7 @@ def convert_video_to_audio(input_file, output_file, audio_bitrate='32k'):
         print(f"Error during conversion: {e}")
 
 input_file = 'video.mp4'
-output_file = 'audio.mp3'
+output_file = './teste/audio.mp3'
 audio_bitrate = '32k'
 prompt = "Esse é um vídeo falando sobre poker. Badziakouski e Watson, opta por jogar de 3-bet para 20,000. não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?"
 convert_video_to_audio(input_file, output_file, audio_bitrate)

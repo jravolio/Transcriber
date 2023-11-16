@@ -6,6 +6,11 @@
     <title>Document</title>
 </head>
 <body>
+    
+    <div>
+        <a href="{% url 'transcribed_list' %}">VIDEO LISTA</a>
+    </div>
+
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
