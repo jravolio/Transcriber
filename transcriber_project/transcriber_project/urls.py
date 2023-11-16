@@ -21,5 +21,6 @@ from transcriber_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('upload/', views.upload, name='upload_video'),
+    path('download/<path:file>/', views.download_file, name='download_file'),
     path('', views.transcribed_list, name='transcribed_list'),
 ]

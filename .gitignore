@@ -53,6 +53,9 @@ cover/
 
 # Translations
 *.mo
+*.mp4
+*.mp3
+*.srt
 *.pot
 
 # Django stuff:
@@ -159,4 +162,4 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-virtualenviroment
+virtualenviroment/
