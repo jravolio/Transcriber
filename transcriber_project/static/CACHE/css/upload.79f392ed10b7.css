@@ -1,0 +1,53 @@
+/* line 1, transcriber_app/static/main/upload.scss */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0 solid transparent; }
+
+/* line 7, transcriber_app/static/main/upload.scss */
+body {
+  font-family: "Arial", sans-serif; }
+
+/* line 11, transcriber_app/static/main/upload.scss */
+div {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; }
+  /* line 19, transcriber_app/static/main/upload.scss */
+  div a {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer; }
+
+/* line 26, transcriber_app/static/main/upload.scss */
+form {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+  /* line 33, transcriber_app/static/main/upload.scss */
+  form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold; }
+  /* line 39, transcriber_app/static/main/upload.scss */
+  form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box; }
+  /* line 46, transcriber_app/static/main/upload.scss */
+  form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px; }
+  /* line 55, transcriber_app/static/main/upload.scss */
+  form button:hover {
+    background-color: #0056b3; }
