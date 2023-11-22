@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    {% load compress %}
+    {% compress css %}
+    <link type="text/x-scss" href="{% static 'main/upload.scss' %}" rel="stylesheet" media="screen">
+    {% endcompress %}
     <title>Document</title>
 </head>
 <body>
     
     <div>
-        <a href="{% url 'transcribed_list' %}">VIDEO LISTA</a>
+        <h1>UPLOAD VIDEO</h1>
+        <a href="{% url 'transcribed_list' %}">Transcribed List</a>
     </div>
 
     <form method="POST" enctype="multipart/form-data">

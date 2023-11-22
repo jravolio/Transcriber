@@ -1,0 +1,51 @@
+/* line 1, transcriber_app/static/main/style.scss */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0 solid transparent; }
+
+/* line 9, transcriber_app/static/main/style.scss */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0; }
+
+/* line 15, transcriber_app/static/main/style.scss */
+.header-text {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px; }
+  /* line 21, transcriber_app/static/main/style.scss */
+  .header-text h1 {
+    margin: 0; }
+  /* line 25, transcriber_app/static/main/style.scss */
+  .header-text a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px; }
+
+/* line 32, transcriber_app/static/main/style.scss */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  margin-right: 100px; }
+  /* line 38, transcriber_app/static/main/style.scss */
+  table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left; }
+  /* line 44, transcriber_app/static/main/style.scss */
+  table th {
+    background-color: #f2f2f2; }
+  /* line 48, transcriber_app/static/main/style.scss */
+  table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; }
+  /* line 52, transcriber_app/static/main/style.scss */
+  table tbody tr:hover {
+    background-color: #e5e5e5; }
+  /* line 56, transcriber_app/static/main/style.scss */
+  table a {
+    color: #007bff;
+    text-decoration: none; }

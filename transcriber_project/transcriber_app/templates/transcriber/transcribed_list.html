@@ -1,23 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {% load static %}
+  {% load compress %}
+  {% compress css %}
+  <link type="text/x-scss" href="{% static 'main/style.scss' %}" rel="stylesheet" media="screen">
+  {% endcompress %}
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="header-text">
     <h1>TRANSCRIBED LIST</h1>
-    <div>
-      <a href="{% url 'upload_video' %}">SUBIR VIDEO</a>
-    </div>
-
-    {% for video in videos %}
-        <p>{{ video.title }}</p>
-        <p>{{ video.raw_file }}</p>
+    <a href="{% url 'upload_video' %}">UPLOAD VIDEO</a>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Download</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for video in videos %}
+      <tr>
+        <td>{{ video.title }}</td>
+        <td>{{ video.upload_time }}</td>
         {% if video.srt_file %}
-            <a href="{% url 'download_file' file=video.srt_file.path %}" download>BAIXAR VIDEO</a>
+        <td>
+          <a href="{% url 'download_file' file=video.srt_file.path %}" download>Download SRT</a>
+        </td>
         {% endif %}
-    {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-  </body>
+</body>
+
 </html>
