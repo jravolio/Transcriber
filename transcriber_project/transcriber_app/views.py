@@ -61,13 +61,13 @@ def transcribe_text(file):
     print(file_name[0])
     convert_video_to_audio(input_file=file.raw_file.path, output_file=f'./media/transcribes/audio_converted/{file_name[0]}.mp3')
 
-    model = whisper.load_model("small")
-    result = model.transcribe(f"media/transcribes/audio_converted/{file_name[0]}.mp3",initial_prompt="Esse é um vídeo falando sobre poker. Badziakouski e Watson, opta por jogar de 3-bet para 20,000. não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?", word_timestamps=True)
+    model = whisper.load_model("large")
+    result = model.transcribe(f"media/transcribes/audio_converted/{file_name[0]}.mp3",initial_prompt="Esse é um vídeo falando sobre poker. André marques e Simon Brandstrom, opta por jogar de 3-bet para 20,000. não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?", word_timestamps=True)
     print(result["text"])
     word_options = {
             "highlight_words": False,
             "max_line_count": 2,
-            "max_line_width": 16
+            "max_line_width": 42
         }
     srt_writer = getwriter("srt", "./media/transcribes/srt_converted")
     srt_writer(result, f'media/transcribes/audio_converted/{file_name[0]}.mp3', word_options)
