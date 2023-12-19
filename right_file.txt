@@ -1,1 +1,0 @@
-whisper audio.mp3 --model small --initial_prompt "Esse é um vídeo falando sobre poker. Ele opta por jogar de 3-bet, não vai desistir desse Dama-Dez não, hein, Del. Flop Vala-Dez-Cinco, e agora?" --word_timestamps True --language br --max_line_count 2 --max_line_width 16
