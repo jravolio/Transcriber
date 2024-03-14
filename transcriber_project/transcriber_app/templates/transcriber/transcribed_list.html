@@ -26,13 +26,17 @@
       </tr>
     </thead>
     <tbody>
-      {% for video in videos %}
+      {% for video in videos reversed %}
       <tr>
         <td>{{ video.title }}</td>
         <td>{{ video.upload_time }}</td>
         {% if video.srt_file %}
         <td>
-          <a href="{% url 'download_file' file=video.srt_file.path %}" download>Download SRT</a>
+          <a href="{% url 'download_file' file=video.srt_file.path %}" download>Download .srt</a>
+        </td>
+        {% else %}
+        <td class="error">
+          <p >No data</p>
         </td>
         {% endif %}
       </tr>

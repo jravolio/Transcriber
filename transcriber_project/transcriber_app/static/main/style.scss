@@ -31,31 +31,43 @@ table {
   margin: 1.5rem 0;
   margin-left: auto;
   margin-right: auto;
-
+  
   th,td {
-    border: 1px solid #ddd;
     padding: 10px;
-    text-align: left;
+    text-align: center;
+    margin: 1px;
   }
 
   th {
-    background-color: #f2f2f2;
+    background-color: #007BFF;
+    text-align: center;
+    color: white;
   }
 
   tbody tr {
-    transition: background-color 250ms;
+    transition: backdrop-filter 250ms;
   }
 
   tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #007bff3b;
   }
 
   tbody tr:hover {
-    background-color: #e5e5e5;
+    backdrop-filter: brightness(.7);
+  }
+
+  .error{
+    p{
+      background-color: rgb(177, 71, 0);
+      color: #f2f2f2;
+      border-radius: 5px;
+      padding: 0.5rem;
+      text-decoration: none;
+    }
   }
 
   a {
-    background-color: #007bff;
+    background-color: #007BFF;
     color: #f2f2f2;
     border-radius: 5px;
     padding: 0.5rem;
