@@ -1,0 +1,37 @@
+# Ignore Docker-specific files
+.dockerignore
+.dockerignore.example
+Dockerfile
+docker-compose.yml
+
+# Ignore version control system files
+.git
+.gitignore
+
+# Ignore Python bytecode
+__pycache__
+*.pyc
+
+# Ignore database files
+*.sqlite3
+*.sql
+
+# Ignore static files and directories
+staticfiles/
+node_modules/
+transcriber_project/static/CACHE/
+
+# Ignore media files
+media/
+
+# Ignore virtual environment
+venv/
+.env
+.venv
+.git
+.DS_Store
+# Ignore editor temporary files
+.vscode/
+.idea/
+*.swp
+*~

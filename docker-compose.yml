@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  django:
+    container_name: django_transcriber
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - django_db:/app/transcriber_project/
+
+volumes:
+  django_db:
