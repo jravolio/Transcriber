@@ -1,13 +1,15 @@
-from django.http import FileResponse, Http404
+import os
+import subprocess
+from pathlib import Path
+
+from django.http import FileResponse
 from django.shortcuts import redirect, render
+from dotenv import load_dotenv
 from openai import OpenAI
+
 from .forms import FileUploadForm
 from .models import Videos
-import subprocess
-import os
-from .tasks import transcribe_text_task
-from dotenv import load_dotenv
-from pathlib import Path
+from .tasks import convert_video_to_audio_task
 
 
 def upload(request):
@@ -42,34 +44,33 @@ def transcribed_list(request):
 
 def transcribe_text(file):
     load_dotenv()
-    file_name = file.raw_file.path.split('/')
-    file_name = file_name[-1].split('.')
-    print('esse é o file_name')
-    file_path = file.raw_file.path
     file_name = Path(file.raw_file.path).stem
     audio_file_path = Path(__file__).resolve().parent.parent / 'media' / 'transcribes' / 'audio_converted' / f'{file_name}.mp3'
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-    convert_video_to_audio_task(input_file=file_path, output_file=audio_file_path)
+    convert_video_to_audio_task(input_file=file.raw_file.path, output_file=audio_file_path)
 
-    audio_file = open(f"{audio_file_path}", "rb")
-    transcript = client.audio.transcriptions.create(
-        file=audio_file,
-        model="whisper-1",
-        response_format="srt",
-        timestamp_granularities=["segment"]
-    )
-    
-    with open(Path(__file__).resolve().parent.parent / 'media' / 'transcribes' / 'srt_converted' / f'{file_name}.srt', 'a', encoding='utf-8') as file:
-        file.write(transcript)
-    
-    print(transcript)
-
+    audio_file = open(audio_file_path, "rb")
     try:
+        transcript = client.audio.transcriptions.create(
+            prompt="This is a video talking about poker. André Marques and Simon Brandstrom choose to play a 3-bet to 20,000. He's not giving up on that Queen-Ten, huh, Del. Flop Jack-Ten-Five, what now?",
+            file=audio_file,
+            model="whisper-1",
+            response_format="srt",
+            timestamp_granularities=["segment"]
+        )
+        srt_directory = Path(__file__).resolve().parent.parent / 'media' / 'transcribes' / 'srt_converted'
+        os.makedirs(srt_directory, exist_ok=True)
+
+        with open(srt_directory / f'{file_name}.srt', 'a', encoding='utf-8') as srt_file:
+            srt_file.write(transcript)
+
+        print(transcript)
+
         video_instance = Videos.objects.get(raw_file=f"transcribes/media/{file_name}.mp4")
         video_instance.srt_file = f'transcribes/srt_converted/{file_name}.srt'
         video_instance.save()
-    except Videos.DoesNotExist:
-        pass
+    except Exception as e:
+        print(f"Error during transcription: {e}")
 
 
 def convert_video_to_audio_task(input_file, output_file, audio_bitrate='32k'):
@@ -83,7 +84,9 @@ def convert_video_to_audio_task(input_file, output_file, audio_bitrate='32k'):
     ]
 
     try:
+        audio_directory = Path(__file__).resolve().parent.parent / 'media' / 'transcribes' / 'audio_converted'
+        os.makedirs(audio_directory, exist_ok=True)
         subprocess.run(ffmpeg_cmd, check=True)
         print(f"Audio conversion successful: {output_file}")
     except subprocess.CalledProcessError as e:
-        print(f"Error during conversion: {e}")
+        print(f"Error during audio conversion: {e}")
